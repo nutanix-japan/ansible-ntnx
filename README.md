@@ -13,13 +13,15 @@ Ansible primarily uses the following pre-installed mechanisms to communicate
 
 Ansible has a very easy to manage folder structure. Ansible is usually installed in ``/etc/ansible`` folder on your server.
 
-/etc/ansible
-├── ansible.cfg      
-├── group_vars
-│   └── windows.yml   <<  contains group parameters for connecting to a windows machines
-├── hosts             <<  contains Ansible targets which can be managed individually or as a group 
-├── VirtIO.yml   
-└── roles
+.. code-block:: bash
+
+    /etc/ansible
+    ├── ansible.cfg      
+    ├── group_vars
+    │   └── windows.yml   <<  contains group parameters for connecting to a windows machines
+    ├── hosts             <<  contains Ansible targets which can be managed individually or as a group 
+    ├── VirtIO.yml   
+    └── roles
 
 
 At a very high level we will be following in the setup to install Nutanix VirtIO MSI package on Windows Hosts.
