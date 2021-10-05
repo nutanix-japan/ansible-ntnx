@@ -51,7 +51,7 @@ This lab assumes that you will be using a linux user with sudo permissions.
 
 Installing pre-requisites and ansible:
 
-.. code-block:: bash
+::
 
   $ sudo yum update
   $ sudo install epel-release
@@ -59,7 +59,7 @@ Installing pre-requisites and ansible:
 
 Installing PIP (pip is the package installer for Python) for WinRM:
 
-.. code-block:: bash
+::
   
   $ sudo pip3 install --upgrade setuptools
   $ python3 -m pip install --user --ignore-installed pywinrm
