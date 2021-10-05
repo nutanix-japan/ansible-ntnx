@@ -6,7 +6,13 @@ There is a plan to increase the contents of this repo to include more Nutanix ba
 
 Ansible uses a server and a client-less connection mechanism.
 
-Ansible primarily uses the following pre-installed mechanisms to communicate
+Requirements:
+
+- 1 x Linux Server
+- Network connectivity to client machines
+- Internet or local repo connectivity on the Ansible server to download and install Ansible packages 
+
+Ansible primarily uses the following pre-installed mechanisms to communicate:
 
 - For Linux like servers - SSH 
 - For Windows servers - WinRM 
@@ -20,9 +26,12 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
     ├── group_vars
     │   └── windows.yml   <<  contains group parameters for connecting to a windows machines
     ├── hosts             <<  contains Ansible targets which can be managed individually or as a group 
-    ├── VirtIO.yml   
+    ├── VirtIO.yml        <<  your playbook
     └── roles
 
+.. note:: 
+
+  It is a good idea to use Ansible Tower (licensed) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing informaion in public forums like Github.
 
 At a very high level we will be following in the setup to install Nutanix VirtIO MSI package on Windows Hosts.
 
@@ -30,4 +39,31 @@ At a very high level we will be following in the setup to install Nutanix VirtIO
 - Setting up WinRM and associated components on Windows client machines
 - Creating a Ansible hosts file to include all our target servers
 - Running the Playbook for VirtIO 
+
+Now we will run through each step:
+
+Installing Ansible Server
+##########################
+
+Login (ssh) to your CentOS server and execute the following commands to install Ansible server.
+
+This lab assumes that you will be using a linux user with sudo permissions.
+
+Installing pre-requisites and ansible:
+
+.. code-block:: bash
+
+  $ sudo yum update
+  $ sudo install epel-release
+  $ sudo yum install ansible
+
+Installing PIP (pip is the package installer for Python) for WinRM:
+
+.. code-block:: bash
+  
+  $ sudo pip3 install --upgrade setuptools
+  $ python3 -m pip install --user --ignore-installed pywinrm
+
+
+
 
