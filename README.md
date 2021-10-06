@@ -61,6 +61,8 @@ At a very high level we will be following in the setup to install Nutanix VirtIO
 
 Now we will run through each step:
 
+## Install Ansible Server
+
 <a href="#getting-started">Installing Ansible Server</a>
 
 Login (ssh) to your CentOS server and execute the following commands to install Ansible server.
@@ -83,5 +85,5 @@ Installing PIP (pip is the package installer for Python) for WinRM:
   $ python3 -m pip install --user --ignore-installed pywinrm
 
 
-
+## Setting up WinRM
 
