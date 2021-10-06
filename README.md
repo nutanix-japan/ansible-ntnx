@@ -8,14 +8,15 @@ Ansible uses a server and a client-less connection mechanism.
 
 ## Requirements:
 
-- 1 x Linux Server
-- Network connectivity to client machines
-- Internet or local repo connectivity on the Ansible server to download and install Ansible packages 
+
+1 x Linux Server
+Network connectivity to client machines
+Internet or local repo connectivity on the Ansible server to download and install Ansible packages 
 
 Ansible primarily uses the following pre-installed mechanisms to communicate:
 
-- For Linux like servers - SSH 
-- For Windows servers - WinRM 
+For Linux like servers - SSH 
+For Windows servers - WinRM 
 
 Ansible has a very easy to manage folder structure. Ansible is usually installed in ``/etc/ansible`` folder on your server.
 
@@ -28,6 +29,7 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
     ├── hosts             <<  contains Ansible targets which can be managed individually or as a group 
     ├── VirtIO.yml        <<  your playbook
     └── roles
+```
 
 ## Security Considerations
 
@@ -40,7 +42,7 @@ At a very high level we will be following in the setup to install Nutanix VirtIO
 - Creating a Ansible hosts file to include all our target servers
 - Running the Playbook for VirtIO 
 
-Now we will run through each step:
+Now we will run through each step
 
 ## Install Ansible Server
 
@@ -54,13 +56,14 @@ Installing pre-requisites and ansible:
   $ sudo yum update
   $ sudo install epel-release
   $ sudo yum install ansible
+```
 
 Installing PIP (pip is the package installer for Python) for WinRM:
 
 ```
   $ sudo pip3 install --upgrade setuptools
   $ python3 -m pip install --user --ignore-installed pywinrm
-
+```
 
 ## Setting up WinRM
 
