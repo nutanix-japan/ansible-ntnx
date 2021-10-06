@@ -17,14 +17,13 @@ Ansible uses a server and a client-less connection mechanism.
 - [Closing Tips](#closing-tips)
 ## Requirements:
 
-1 x Linux Server
-Network connectivity to client machines
-Internet or local repo connectivity on the Ansible server to download and install Ansible packages 
+Ansible has an agent less connectivity Mechanism. It uses basic OS features (SSH and WinRM) to communicate with client machines.
 
-Ansible primarily uses the following pre-installed mechanisms to communicate:
-
-For Linux like servers - SSH 
-For Windows servers - WinRM 
+1. 1 x Linux Server
+2. Network connectivity to client machines
+    - WinRM connectivity for Windows servers
+    - SSH connectivity for Linux servers
+3. Internet or local repo connectivity on the Ansible server to download and install Ansible packages 
 
 ## Ansible Folder Structure
 
@@ -74,7 +73,17 @@ Installing PIP (pip is the package installer for Python) for WinRM:
   $ sudo pip3 install --upgrade setuptools
   $ python3 -m pip install --user --ignore-installed pywinrm
 ```
+
+This should get your Ansible server to communicate with Windows clients. 
 ## Setting up WinRM
+
+If your Windows clients are not installed, run the following script in PowerShell on your Windows client to enable the following:
+
+- WinRM Listener
+- WinRM Client
+
+It is important that your firewall is open for these services.
+
 
 
 
