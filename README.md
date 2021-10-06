@@ -171,6 +171,9 @@ Ansible uses the hosts file to get a list of servers that it has to work with. T
 
 A sample hosts file would look like this. Note that we have put in entries for my windows servers at the end where we will be installing software
 
+File in github repo: ``ansible-ntnx/hosts.sample``
+File in Ansible folder ``/etc/ansible/hosts``
+
 ```
 # Example: A collection of database servers in the 'dbservers' group
 
