@@ -41,13 +41,11 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
     └── roles
 ```
 ## Security Considerations
-
 ### Ansible Secrets
 
 It is a good idea to use Ansible Tower (licensed) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing informaion in public forums like Github.
 
 In this example we are just using a local file for defining credentials. Be sure to change this in your production environment. Make sure this is secure and not accidentally exposed in anyway. 
-
 ### WinRM Enablement Script
 
 The script used in this article is a a direct download from a contributor in Public Github. 
@@ -55,7 +53,6 @@ The script used in this article is a a direct download from a contributor in Pub
 View the script here before downloading and executing [WinRM Enablement Script](https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1).
 
 It is advised to go through this script carefully before executing this on your client machines. We do not provide any support for this script nor take responsibility for the effects of running this script.
-
 ## Install Ansible Server
 
 Login (ssh) to your CentOS server and execute the following commands to install Ansible server.
@@ -78,7 +75,6 @@ Installing PIP (pip is the package installer for Python) for WinRM:
 ```
 
 This should get your Ansible server to communicate with Windows clients.
-
 ## Clone Github Repo
 
 Clone this Github Repo to you Ansible folder to get all folder structure and sample files.
@@ -168,7 +164,6 @@ server3
 ```
 
 Now lets do a Ansible ping command to check if the connections work from the Ansible server and avaiable to Ansible modules.
-
 
 ```
 Use the windows server name to test the connections to windows target servers.
