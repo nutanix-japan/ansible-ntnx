@@ -19,7 +19,7 @@ Ansible primarily uses the following pre-installed mechanisms to communicate:
 
 Ansible has a very easy to manage folder structure. Ansible is usually installed in ``/etc/ansible`` folder on your server.
 
-.. code-block:: bash
+```
 
     /etc/ansible
     ├── ansible.cfg      
@@ -42,8 +42,8 @@ At a very high level we will be following in the setup to install Nutanix VirtIO
 
 Now we will run through each step:
 
-Installing Ansible Server
-##########################
+
+<a href="#getting-started">Installing Ansible Server</a>
 
 Login (ssh) to your CentOS server and execute the following commands to install Ansible server.
 
@@ -51,7 +51,7 @@ This lab assumes that you will be using a linux user with sudo permissions.
 
 Installing pre-requisites and ansible:
 
-::
+```
 
   $ sudo yum update
   $ sudo install epel-release
@@ -59,8 +59,8 @@ Installing pre-requisites and ansible:
 
 Installing PIP (pip is the package installer for Python) for WinRM:
 
-::
-  
+
+```
   $ sudo pip3 install --upgrade setuptools
   $ python3 -m pip install --user --ignore-installed pywinrm
 
