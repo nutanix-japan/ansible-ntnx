@@ -66,7 +66,7 @@ It is a good idea to use Ansible Tower (licensed) to store your credentials for 
 
 In this example we are just using a local file for defining credentials. Be sure to change this in your production environment. Make sure this is secure and not accidentally exposed in anyway. 
 
-Use the following (not limited)to make information secure:
+Use the following (not limited) to make information secure:
 
 - Define .gitignore file to avoid uploading any sensitive file to GitHub repo
 - Use SSH keys where possible
