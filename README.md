@@ -45,6 +45,8 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
 
 It is a good idea to use Ansible Tower (licensed) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing informaion in public forums like Github.
 
+In this example we are just using a local file for defining credentials. Be sure to change this in your production environment. Make sure this is secure and not accidentally exposed in anyway. 
+
 ### WinRM Enablement Script
 
 The script used in this article is a a direct download from a contributor in Public Github. 
@@ -196,14 +198,14 @@ server4 | UNREACHABLE! => {
 Here is a Netcat tool command to check if all required winrm listener ports are open.
 
 ```
-[ansiblehost ~]$ nc -vz 10.42.8.77 5985
+[ansiblehost ~]$ nc -vz 10.x.x.x 5985
 Ncat: Version 7.70 ( https://nmap.org/ncat )
-Ncat: Connected to 10.42.8.77:5985.
+Ncat: Connected to 10.x.x.x:5985.
 Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
 
-[ansiblehost ~]$ nc -vz 10.42.8.77 5986
+[ansiblehost ~]$ nc -vz 10.x.x.x 5986
 Ncat: Version 7.70 ( https://nmap.org/ncat )
-Ncat: Connected to 10.42.8.77:5986.
+Ncat: Connected to 10.x.x.x:5986.
 Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
 ```
 ## Ansible Playbook
@@ -250,8 +252,45 @@ File in github repo: ``ansible-ntnx/group_vars/windows-servers.yml`` (note that 
 
 File in Ansible folder ``/etc/ansible/group_vars/windows-servers.yml``
 
+```
+---
+ansible_user: "your-user-name"
+ansible_password: "your-password"
+ansible_port: "5986"
+ansible_connection: "winrm"
+ansible_winrm_transport: "basic"
+ansible_winrm_server_cert_validation: ignore
+```
+## Running Playbook
 
+As we have everything required to run the playbook, let's run it.
 
+```
+[ansiblehost ~]$ ansible-playbook /etc/ansible/playbooks/virtio.yml -e "NODES=windows-servers"
+
+PLAY [Install Nutanix VirtIO Package] *********************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************
+
+ok: [server1]
+ok: [server2]
+ok: [server3]
+
+TASK [Check Windows machines access using win_ping] ************************************************************************************
+ok: [lbwintools]
+
+TASK [Install Nutanix VirtIO Package] **********************************************************************************************************
+
+ok: [server1]
+ok: [server2]
+ok: [server3]
+
+PLAY RECAP *****************************************************************************************************************************
+server1                 : ok=2    changed=1    unreachable=0    failed=0   skipped=0    rescued=0    ignored=0 
+server2                 : ok=2    changed=1    unreachable=0    failed=0   skipped=0    rescued=0    ignored=0 
+server3                 : ok=2    changed=1    unreachable=0    failed=0   skipped=0    rescued=0    ignored=0 
+
+```
 
 
 
