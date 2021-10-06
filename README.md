@@ -62,15 +62,15 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
 ## Security Considerations
 ### Ansible Secrets
 
-It is a good idea to use Ansible Tower (licensed) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing information in public forums like Github.
+It is a secure to use Ansible Tower (licensed by RedHat) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing information in public forums like Github.
 
 In this example we are just using a local file for defining credentials. Be sure to change this in your production environment. Make sure this is secure and not accidentally exposed in anyway. 
 
 Use the following (not limited) to make information secure:
 
-- Define .gitignore file to avoid uploading any sensitive file to GitHub repo
-- Use SSH keys where possible
-- Avoid accidentally exposing credential while running scipt in STDOUT
+- Define exclusoins in .gitignore file to avoid uploading any sensitive file to GitHub repo
+- Use SSH key logon where possible
+- Avoid accidentally exposing credential while running script in STDOUT
 - Use password vaults
 - Use Ansible Tower to store passwords 
 - Auto-rotate passwords at regular intervals
@@ -93,7 +93,8 @@ Installing pre-requisites and ansible:
 ```
   [ansiblehost ~]$ sudo yum update
   [ansiblehost ~]$ sudo install epel-release
-  [ansiblehost ~]$ sudo yum install ansible
+  [ansiblehost ~]$ sudo yum install -y ansible
+  [ansiblehost ~]$ sudo yum install -y git
 ```
 
 Installing PIP (pip is the package installer for Python) for WinRM:
@@ -207,6 +208,7 @@ server1 | SUCCESS => {
 }
 
 Use the group (windows-servers) name defined in the ``/etc/ansible/hosts`` file to target a group of servers.
+
 [ansiblehost ~]$ ansible windows-servers -m win_ping
 server1 | SUCCESS => {
     "changed": false,
