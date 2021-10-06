@@ -35,13 +35,27 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
 
 At a very high level we will be following in the setup to install Nutanix VirtIO MSI package on Windows Hosts.
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#install-ansible-server">Install Ansible Server</a>
+    </li>
+    <li>
+      <a href="#setting-up-winrm">Setting up WinRM</a>
+    </li>
+    <li><a href="#ansible-host-file">Seeting up Ansible hosts file</a></li>
+    <li><a href="#playbook">Running Playbook</a></li>
+  </ol>
+</details>
+
 - Installing Ansible server package on CentOS 8 server
 - Setting up WinRM and associated components on Windows client machines
 - Creating a Ansible hosts file to include all our target servers
 - Running the Playbook for VirtIO 
 
 Now we will run through each step:
-
 
 <a href="#getting-started">Installing Ansible Server</a>
 
