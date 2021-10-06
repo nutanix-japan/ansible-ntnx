@@ -100,7 +100,7 @@ Installing PIP (pip is the package installer for Python) for WinRM:
 
 ```
   [ansiblehost ~]$ sudo pip3 install --upgrade setuptools
-  [ansiblehost ~]$ python3 -m pip install --user --ignore-installed pywinrm
+  [ansiblehost ~]$ sudo python3 -m pip install --user --ignore-installed pywinrm
 ```
 
 This should get your Ansible server to communicate with Windows clients.
