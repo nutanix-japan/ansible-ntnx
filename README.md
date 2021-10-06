@@ -10,6 +10,7 @@ Ansible uses a server and a client-less connection mechanism.
 - [Ansible Folder Structure](#ansible-folder-structure)
 - [Security Considerations](#security-considerations)
 - [Install Ansible Serve](#install-ansible-server)
+- [Clone Github Repo](#clone-github-repo)
 - [Setting up WinRM](#setting-up-winrm)
 - [Ansible Hosts File](#ansible-hosts-file)
 - [Ansible Playbook](#ansible-playbook)
@@ -76,7 +77,16 @@ Installing PIP (pip is the package installer for Python) for WinRM:
   [ansiblehost ~]$ python3 -m pip install --user --ignore-installed pywinrm
 ```
 
-This should get your Ansible server to communicate with Windows clients. 
+This should get your Ansible server to communicate with Windows clients.
+
+## Clone Github Repo
+
+Clone this Github Repo to you Ansible folder to get all folder structure and sample files.
+
+```
+[ansiblehost ~]$ cd /etc/ansible
+[ansiblehost ~]$ git clone https://github.com/nutanix-japan/ansible-ntnx
+```
 ## Setting up WinRM
 
 If your Windows clients are not installed, run the following script in PowerShell on your Windows client to enable the following:
@@ -292,6 +302,23 @@ server3                 : ok=2    changed=1    unreachable=0    failed=0   skipp
 
 ```
 
+You can get a high level view of successful play are any errors in the PLAY RECAP section of the output.
+### Verifying VirtIO install on Windows servers
 
+We can now logon to the client to verify if VirtIO package was successful.
 
+1. Open Control Panel > Programs and check for VirtIO presence.
 
+   ![VirtIO](./images/virtio-confirm-program.png)
+   
+2. Since we have defined logs in the playbook check ``C:\virtio_x64-exe-*.log``
+
+   ![VirtIO-FS](./images/virtio-confirm-fs.png)
+
+## Closing Tips
+
+- Automating configuration management using Ansible saves a lot of time
+- The RoI on configuration management is huge
+- Make sure to maintain your Ansible server with latest OS patches, and always secure files containing credentials and other sensitive information
+- Use Ansible tower for GUI experience and if you have on-going configuration management practice in your organisation
+- Be sure to ask questions in the Ansible forums. There is plenty of help available
