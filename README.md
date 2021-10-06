@@ -12,6 +12,7 @@ Ansible uses a server and a client-less connection mechanism.
 
 We will do the following to setup Ansible and ultimately install required software on Windows servers using Ansible.
 
+- [Credits](#credits)
 - [Requirements](#requirements)
 - [Ansible Folder Structure](#ansible-folder-structure)
 - [Security Considerations](#security-considerations)
@@ -22,6 +23,18 @@ We will do the following to setup Ansible and ultimately install required softwa
 - [Ansible Playbook](#ansible-playbook)
 - [Running Playbook](#running-playbook)
 - [Closing Tips](#closing-tips)
+
+## Credits
+
+This repo is a mash of several articles avaiable on the web to achieve what is required for our use case - installing Nutanix VirtIO package for several windows servers. 
+
+I have referred to the following documents as far as I can remember.
+
+- [Techbeatly Configure Ansbile for Windows Management](#https://www.techbeatly.com/2020/12/configure-your-windows-host-to-manage-by-ansible.html)
+- [Techbeatly Install Ansible](#https://www.techbeatly.com/2018/06/ansible-part-2-installing-ansible.html)
+- [Ansible win_package Reference](#https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_package_module.html)
+- [Ansible GitHub](#https://www.github.com/ansible)
+
 ## Requirements:
 
 Ansible has an agent less connectivity Mechanism. It uses basic OS features (SSH and WinRM) to communicate with client machines.
@@ -49,9 +62,19 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
 ## Security Considerations
 ### Ansible Secrets
 
-It is a good idea to use Ansible Tower (licensed) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing informaion in public forums like Github.
+It is a good idea to use Ansible Tower (licensed) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing information in public forums like Github.
 
 In this example we are just using a local file for defining credentials. Be sure to change this in your production environment. Make sure this is secure and not accidentally exposed in anyway. 
+
+Use the following (not limited)to make information secure:
+
+- Define .gitignore file to avoid uploading any sensitive file to GitHub repo
+- Use SSH keys where possible
+- Avoid accidentally exposing credential while running scipt in STDOUT
+- Use password vaults
+- Use Ansible Tower to store passwords 
+- Auto-rotate passwords at regular intervals
+- Give appropriate permissions to file for access if you absolutely have to store password in files
 ### WinRM Enablement Script
 
 The script used in this article is a a direct download from a contributor in Public Github. 
