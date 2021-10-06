@@ -1,4 +1,4 @@
-# ansible-ntnx
+# Ansible Automation for Nutanix Tools
 
 This is a sample repo to get started with Ansible integration with Windows. Although this is not a new concept. This is a repo to just share the folder strutucture to instlal Nutanix VirtIO with interested parties. 
 
@@ -6,7 +6,7 @@ There is a plan to increase the contents of this repo to include more Nutanix ba
 
 Ansible uses a server and a client-less connection mechanism.
 
-Requirements:
+## Requirements:
 
 - 1 x Linux Server
 - Network connectivity to client machines
@@ -29,30 +29,11 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
     ├── VirtIO.yml        <<  your playbook
     └── roles
 
-.. note:: 
+## Security Considerations
 
-  It is a good idea to use Ansible Tower (licensed) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing informaion in public forums like Github.
+It is a good idea to use Ansible Tower (licensed) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing informaion in public forums like Github.
 
 At a very high level we will be following in the setup to install Nutanix VirtIO MSI package on Windows Hosts.
-
-- [OpenShift 4 Bare Metal Install - User Provisioned Infrastructure (UPI)](#openshift-4-bare-metal-install---user-provisioned-infrastructure-upi)
-  - [Install Ansible Server](#install-ansible-server)
-  - [Setting up WinRM](#setting-up-winrm)
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#install-ansible-server">Install Ansible Server</a>
-    </li>
-    <li>
-      <a href="#setting-up-winrm">Setting up WinRM</a>
-    </li>
-    <li><a href="#ansible-host-file">Seeting up Ansible hosts file</a></li>
-    <li><a href="#playbook">Running Playbook</a></li>
-  </ol>
-</details>
 
 - Installing Ansible server package on CentOS 8 server
 - Setting up WinRM and associated components on Windows client machines
@@ -63,8 +44,6 @@ Now we will run through each step:
 
 ## Install Ansible Server
 
-<a href="#getting-started">Installing Ansible Server</a>
-
 Login (ssh) to your CentOS server and execute the following commands to install Ansible server.
 
 This lab assumes that you will be using a linux user with sudo permissions.
@@ -72,13 +51,11 @@ This lab assumes that you will be using a linux user with sudo permissions.
 Installing pre-requisites and ansible:
 
 ```
-
   $ sudo yum update
   $ sudo install epel-release
   $ sudo yum install ansible
 
 Installing PIP (pip is the package installer for Python) for WinRM:
-
 
 ```
   $ sudo pip3 install --upgrade setuptools
