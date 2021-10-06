@@ -16,7 +16,7 @@ We will do the following to setup Ansible and ultimately install required softwa
 - [Requirements](#requirements)
 - [Ansible Folder Structure](#ansible-folder-structure)
 - [Security Considerations](#security-considerations)
-- [Install Ansible Serve](#install-ansible-server)
+- [Install Ansible Server](#install-ansible-server)
 - [Clone Github Repo](#clone-github-repo)
 - [Setting up WinRM](#setting-up-winrm)
 - [Ansible Hosts File](#ansible-hosts-file)
