@@ -63,16 +63,16 @@ This procedure assumes that you will be using a linux user with sudo permissions
 Installing pre-requisites and ansible:
 
 ```
-  $ sudo yum update
-  $ sudo install epel-release
-  $ sudo yum install ansible
+  [ansiblehost ~]$ sudo yum update
+  [ansiblehost ~]$ sudo install epel-release
+  [ansiblehost ~]$ sudo yum install ansible
 ```
 
 Installing PIP (pip is the package installer for Python) for WinRM:
 
 ```
-  $ sudo pip3 install --upgrade setuptools
-  $ python3 -m pip install --user --ignore-installed pywinrm
+  [ansiblehost ~]$ sudo pip3 install --upgrade setuptools
+  [ansiblehost ~]$ python3 -m pip install --user --ignore-installed pywinrm
 ```
 
 This should get your Ansible server to communicate with Windows clients. 
@@ -126,9 +126,86 @@ winrm get winrm/config
 }
 ```
 
-Once you have done this all target windows VMs you are ready to move to next step.
+Once you have done this all your target windows servers you are ready to move to next step.
+## Ansible Hosts File
+
+In this section we will work on confirming whether Ansible is able to communicate with the Windows servers.
+
+Ansible uses the hosts file to get a list of servers that it has to work with. This is located in on you ansible server in this path ``/etc/ansible/hosts``
+
+A sample hosts file would look like this. Note that we have put in entries for my windows servers at the end where we will be installing software
+
+```
+# Example: A collection of database servers in the 'dbservers' group
+
+## [dbservers]
+## 
+## db01.intranet.mydomain.net
+## db02.intranet.mydomain.net
+## 10.25.1.56
+## 10.25.1.57
+
+# Here's another example of host ranges, this time there are no
+# leading 0s:
+
+## db-[99:101]-node.example.com
+
+[windows-servers]
+server1                         #Enter the server name if there is DNS resolution available
+server2 ansible_host=10.x.x.x   #Explicity indicate IP address if there is no DNS resolution
+server3	                        
+```
+
+Now lets do a Ansible ping command to check if the connections work from the Ansible server and avaiable to Ansible modules.
 
 
+```
+Use the windows server name to test the connections to windows target servers.
+
+[ansiblehost ~]$ ansible server1 -m win_ping
+server1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+
+Use the group (windows-servers) name defined in the ``/etc/ansible/hosts`` file to target a group of servers.
+[ansiblehost ~]$ ansible windows-servers -m win_ping
+server1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+server2 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+server3 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+If there are any issues, troubleshoot accordingly. Ansible will give accurate error messages as follows*
+
+```
+[ansiblehost ~]$ansible server4 -m win_ping
+server4 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "basic: HTTPSConnectionPool(host='10.x.x.x', port=5986): Max retries exceeded with url: /wsman (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f4420817b38>: Failed to establish a new connection: [Errno 113] No route to host',))",
+    "unreachable": true
+}
+```
+
+Here is a Netcat tool command to check if all required ports are open.
+
+```
+[ansiblehost ~]$ nc -vz 10.42.8.77 5985
+Ncat: Version 7.70 ( https://nmap.org/ncat )
+Ncat: Connected to 10.42.8.77:5985.
+Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
+[ansiblehost ~]$ nc -vz 10.42.8.77 5986
+Ncat: Version 7.70 ( https://nmap.org/ncat )
+Ncat: Connected to 10.42.8.77:5986.
+Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
+```
 
 
 
