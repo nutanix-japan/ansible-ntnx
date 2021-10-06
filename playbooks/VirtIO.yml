@@ -1,0 +1,16 @@
+---
+
+- name: "Install Nutanix VirtIO Package"
+  hosts: "{{ NODES }}"
+  tasks:
+    - name: "Check connection to windows clients"
+      win_ping:
+      when: ansible_os_family == 'Windows'
+
+    - name: "Install Nutanix VirtIO Package"
+      win_package:
+        path: \\server\share\Nutanix-VirtIO-1.1.6-amd64.msi
+        product_id: '{26737308-08BA-4E6B-9216-50010819E1AC}'
+        state: present
+        argument: '/q /norestart'
+        log_path: C:\virtio_x64-exe-{{lookup('pipe', 'date +%Y%m%dT%H%M%S')}}.log

@@ -31,15 +31,14 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
 
 ```
 
-    /etc/ansible
-    ├── ansible.cfg      
+    ├── ansible.cfg
     ├── group_vars
-    │   └── windows.yml   <<  contains group parameters for connecting to a windows machines
-    ├── hosts             <<  contains Ansible targets which can be managed individually or as a group 
-    ├── VirtIO.yml        <<  your playbook
+    │   └── windows-servers.yml    <<  contains group parameters for connecting to a windows machines
+    ├── hosts              <<  contains Ansible targets which can be managed individually or as a group 
+    ├── playbooks          <<  your playbook folder
+    │   └── virtio.yml     <<  your playbook
     └── roles
 ```
-
 ## Security Considerations
 
 ### Ansible Secrets
@@ -183,7 +182,7 @@ server3 | SUCCESS => {
     "ping": "pong"
 }
 ```
-If there are any issues, troubleshoot accordingly. Ansible will give accurate error messages as follows*
+If there are any issues, troubleshoot accordingly. Ansible will give accurate error messages as follows:
 
 ```
 [ansiblehost ~]$ansible server4 -m win_ping
@@ -194,19 +193,62 @@ server4 | UNREACHABLE! => {
 }
 ```
 
-Here is a Netcat tool command to check if all required ports are open.
+Here is a Netcat tool command to check if all required winrm listener ports are open.
 
 ```
 [ansiblehost ~]$ nc -vz 10.42.8.77 5985
 Ncat: Version 7.70 ( https://nmap.org/ncat )
 Ncat: Connected to 10.42.8.77:5985.
 Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
+
 [ansiblehost ~]$ nc -vz 10.42.8.77 5986
 Ncat: Version 7.70 ( https://nmap.org/ncat )
 Ncat: Connected to 10.42.8.77:5986.
 Ncat: 0 bytes sent, 0 bytes received in 0.01 seconds.
 ```
+## Ansible Playbook
 
+Now lets create and run our playbook.
+
+This playbook does two things.
+
+1. Optional step - Test connection between Ansible server and windows client servers (ping-pong) - feel free to remove this
+2. Install Nutanix VirtIO - feel free to include other packages you may want to install.
+
+Here is a reference for package install [win_package](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_package_module.html)  module for Ansible. Be sure to check out [win_chocolatey](https://docs.ansible.com/ansible/latest/collections/chocolatey/chocolatey/win_chocolatey_module.html) module as well. 
+
+In this section we will be only using win_package module.
+
+File in github repo: ``ansible-ntnx/VirtIO.yml``
+File in Ansible folder ``/etc/ansible/playbooks/VirtIO.yml``
+
+```
+---
+
+- name: "Install RDM"
+  hosts: "{{ NODES }}"
+  tasks:
+    - name: "Check connection to windows clients"
+      win_ping:
+      when: ansible_os_family == 'Windows'
+
+    - name: Install Nutanix VirtIO 
+      win_package:
+        path: \\server\share\Nutanix-VirtIO-1.1.6-amd64.msi
+        product_id: '{26737308-08BA-4E6B-9216-50010819E1AC}'
+        state: present
+        argument: '/q /norestart'
+        log_path: C:\virtio_x64-exe-{{lookup('pipe', 'date +%Y%m%dT%H%M%S')}}.log
+
+```
+
+Now we need to define connection credentials and connection type for Ansible to connect to windows clients
+
+We will be using a definition file under group_vars folder.
+
+File in github repo: ``ansible-ntnx/group_vars/windows-servers.yml`` (note that this file is named after the group defined in the ``/etc/ansible/hosts`` file)
+
+File in Ansible folder ``/etc/ansible/group_vars/windows-servers.yml``
 
 
 
