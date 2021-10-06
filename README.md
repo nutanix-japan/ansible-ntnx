@@ -42,16 +42,17 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
 
 ## Security Considerations
 
+### Ansible Secrets
+
 It is a good idea to use Ansible Tower (licensed) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing informaion in public forums like Github.
 
-At a very high level we will be following in the setup to install Nutanix VirtIO MSI package on Windows Hosts.
+### WinRM Enablement Script
 
-- Installing Ansible server package on CentOS 8 server
-- Setting up WinRM and associated components on Windows client machines
-- Creating a Ansible hosts file to include all our target servers
-- Running the Playbook for VirtIO 
+The script used in this article is a a direct download from a contributor in Public Github. 
 
-Now we will run through each step
+View the script here before downloading and executing [WinRM Enablement Script](https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1).
+
+It is advised to go through this script carefully before executing this on your client machines. We do not provide any support for this script nor take responsibility for the effects of running this script.
 
 ## Install Ansible Server
 
@@ -79,10 +80,58 @@ This should get your Ansible server to communicate with Windows clients.
 
 If your Windows clients are not installed, run the following script in PowerShell on your Windows client to enable the following:
 
-- WinRM Listener
-- WinRM Client
+- WinRM Listener (TCP 5895 and TCP 5896)
+- WinRM Service
 
-It is important that your firewall is open for these services.
+It is important that your firewall is open inbound for these services.
+
+You only need to complete setup in this section if your Windows clients do not have WinRM enabled.
+
+Run the following script in PowerShell on the client Windows servers. 
+
+```
+
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+
+$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
+(New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
+powershell.exe -ExecutionPolicy ByPass -File $file
+
+winrm get winrm/config
+
+```
+You can also run the script using PowerShell remotely. Please be sure to check out the pre-requistes for doing this.
+
+Here is an example of how you would run PowerShell script remotely.
+
+```
+Invoke-Command -ComputerName Server01, Server02 -FilePath C:\ConfigureRemotingForAnsible.ps1
+
+```
+
+This is another way of running your script remotely.
+
+```
+Invoke-Command -ComputerName Server01, Server02 -ScriptBlock
+{
+Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+
+$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
+(New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
+powershell.exe -ExecutionPolicy ByPass -File $file
+
+winrm get winrm/config
+}
+```
+
+Once you have done this all target windows VMs you are ready to move to next step.
+
+
+
+
+
 
 
 
