@@ -6,8 +6,16 @@ There is a plan to increase the contents of this repo to include more Nutanix ba
 
 Ansible uses a server and a client-less connection mechanism.
 
+- [Requirements](#requirements)
+- [Ansible Folder Structure](#ansible-folder-structure)
+- [Security Considerations](#security-considerations)
+- [Install Ansible Serve](#install-ansible-server)
+- [Setting up WinRM](#setting-up-winrm)
+- [Ansible Hosts File](#ansible-hosts-file)
+- [Ansible Playbook](#ansible-playbook)
+- [Running Playbook](#running-playbook)
+- [Closing Tips](#closing-tips)
 ## Requirements:
-
 
 1 x Linux Server
 Network connectivity to client machines
@@ -17,6 +25,8 @@ Ansible primarily uses the following pre-installed mechanisms to communicate:
 
 For Linux like servers - SSH 
 For Windows servers - WinRM 
+
+## Ansible Folder Structure
 
 Ansible has a very easy to manage folder structure. Ansible is usually installed in ``/etc/ansible`` folder on your server.
 
@@ -48,7 +58,7 @@ Now we will run through each step
 
 Login (ssh) to your CentOS server and execute the following commands to install Ansible server.
 
-This lab assumes that you will be using a linux user with sudo permissions.
+This procedure assumes that you will be using a linux user with sudo permissions.
 
 Installing pre-requisites and ansible:
 
@@ -64,6 +74,8 @@ Installing PIP (pip is the package installer for Python) for WinRM:
   $ sudo pip3 install --upgrade setuptools
   $ python3 -m pip install --user --ignore-installed pywinrm
 ```
-
 ## Setting up WinRM
+
+
+
 
