@@ -35,7 +35,7 @@ I have referred to the following documents as far as I can remember.
 - [Ansible win_package Reference](#https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_package_module.html)
 - [Ansible GitHub](#https://www.github.com/ansible)
 
-## Requirements:
+## Requirements
 
 Ansible has an agent less connectivity Mechanism. It uses basic OS features (SSH and WinRM) to communicate with client machines.
 
