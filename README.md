@@ -2,6 +2,8 @@
 
 This is a sample repo to get started with Ansible integration with Windows. Although this is not a new concept.
 
+これから日本語ですよ！
+
 This is a repo to just share the folder structure to install Nutanix VirtIO with interested parties. 
 
 There is a plan to increase the contents of this repo to include more Nutanix based use cases which can be achieved with Ansible.
