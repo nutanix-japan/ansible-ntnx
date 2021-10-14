@@ -113,6 +113,22 @@ Clone this Github Repo to you Ansible folder to get all folder structure and sam
 [ansiblehost ~]$ cd /etc/ansible
 [ansiblehost ~]$ git clone https://github.com/nutanix-japan/ansible-ntnx.git .
 ```
+
+Make sure your ``/etc/ansible`` folder structure looks as follows:
+
+```
+ [ansiblehost ~]$tree /etc/ansible
+ 
+/etc/ansible
+├── ansible.cfg
+├── git.yml
+├── group_vars
+│   └── windows.yml
+├── hosts
+├── playbooks
+│   └── virtio.yml
+└── roles
+```
 ## Setting up WinRM
 
 If your Windows clients are not installed, run the following script in PowerShell on your Windows client to enable the following:
