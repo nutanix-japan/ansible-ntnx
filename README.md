@@ -141,7 +141,7 @@ You only need to complete setup in this section if your Windows clients do not h
 
 Run the following script in PowerShell on the client Windows servers. 
 
-```
+```PowerShell
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
@@ -157,14 +157,14 @@ You can also run the script using PowerShell remotely. Please be sure to check o
 
 Here is an example of how you would run PowerShell script remotely.
 
-```
+```PowerShell
 Invoke-Command -ComputerName Server01, Server02 -FilePath C:\ConfigureRemotingForAnsible.ps1
 
 ```
 
 This is another way of running your script remotely.
 
-```
+```PowerShell
 Invoke-Command -ComputerName Server01, Server02 -ScriptBlock
 {
 Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
