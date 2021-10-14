@@ -240,7 +240,7 @@ server3 | SUCCESS => {
 ```
 If there are any issues, troubleshoot accordingly. Ansible will give accurate error messages as follows:
 
-```
+```bash
 [ansiblehost ~]$ansible server4 -m win_ping
 server4 | UNREACHABLE! => {
     "changed": false,
@@ -251,7 +251,7 @@ server4 | UNREACHABLE! => {
 
 Here is a Netcat tool command to check if all required winrm listener ports are open.
 
-```
+```bash
 [ansiblehost ~]$ nc -vz 10.x.x.x 5985
 Ncat: Version 7.70 ( https://nmap.org/ncat )
 Ncat: Connected to 10.x.x.x:5985.
@@ -275,7 +275,7 @@ Here is a reference for package install [win_package](https://docs.ansible.com/a
 
 In this section we will be only using win_package module.
 
-```
+```yaml
 ---
 
 - name: "Install RDM"
@@ -308,7 +308,7 @@ File in github repo: ``ansible-ntnx/group_vars/windows-servers.yml`` (note that 
 
 File in Ansible folder ``/etc/ansible/group_vars/windows-servers.yml``
 
-```
+```yaml
 ---
 ansible_user: "your-user-name"
 ansible_password: "your-password"
