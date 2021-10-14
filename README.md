@@ -275,9 +275,6 @@ Here is a reference for package install [win_package](https://docs.ansible.com/a
 
 In this section we will be only using win_package module.
 
-File in github repo: ``ansible-ntnx/VirtIO.yml``
-File in Ansible folder ``/etc/ansible/playbooks/VirtIO.yml``
-
 ```
 ---
 
@@ -296,6 +293,11 @@ File in Ansible folder ``/etc/ansible/playbooks/VirtIO.yml``
         argument: '/q /norestart'
         log_path: C:\virtio_x64-exe-{{lookup('pipe', 'date +%Y%m%dT%H%M%S')}}.log
 
+```
+Note that the product ID/GUID ``product_id`` in the above playbook for the VirtIO package needs to be exact. This value is found by manually installing VirtIO package on a Windows server and finding the ``product_id`` either by using the Windows Registry or the following PowerShell command:
+
+```PowerShell
+get-wmiobject Win32_Product | Sort-Object -Property Name |Format-Table IdentifyingNumber, Name, LocalPackage -AutoSize
 ```
 
 Now we need to define connection credentials and connection type for Ansible to connect to windows clients
