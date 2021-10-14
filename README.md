@@ -111,9 +111,7 @@ Clone this Github Repo to you Ansible folder to get all folder structure and sam
 
 ```
 [ansiblehost ~]$ cd /etc/ansible
-[ansiblehost ~]$ git clone https://github.com/nutanix-japan/ansible-ntnx
-[ansiblehost ~]$ cd ansible-ntnx/
-[ansiblehost ~]$ mv *.* ../
+[ansiblehost ~]$ git clone https://github.com/nutanix-japan/ansible-ntnx.git .
 ```
 ## Setting up WinRM
 
