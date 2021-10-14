@@ -117,11 +117,10 @@ Clone this Github Repo to you Ansible folder to get all folder structure and sam
 Make sure your ``/etc/ansible`` folder structure looks as follows:
 
 ```
- [ansiblehost ~]$tree /etc/ansible
+[ansiblehost ~]$tree /etc/ansible
  
 /etc/ansible
 ├── ansible.cfg
-├── git.yml
 ├── group_vars
 │   └── windows.yml
 ├── hosts
