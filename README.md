@@ -273,7 +273,7 @@ This playbook does two things.
 
 Here is a reference for package install [win_package](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_package_module.html)  module for Ansible. Be sure to check out [win_chocolatey](https://docs.ansible.com/ansible/latest/collections/chocolatey/chocolatey/win_chocolatey_module.html) module as well. 
 
-In this section we will be only using win_package module.
+In this section we will be only using win_package module of Ansible.
 
 ```yaml
 ---
