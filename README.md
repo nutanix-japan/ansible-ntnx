@@ -49,7 +49,7 @@ Ansible has an agent less connectivity Mechanism. It uses basic OS features (SSH
 
 Ansible has a very easy to manage folder structure. Ansible is usually installed in ``/etc/ansible`` folder on your server.
 
-```
+```bash
 
     ├── ansible.cfg
     ├── group_vars
@@ -90,7 +90,7 @@ This procedure assumes that you will be using a linux user with sudo permissions
 
 Installing pre-requisites and ansible:
 
-```
+```bash
   [ansiblehost ~]$ sudo yum update
   [ansiblehost ~]$ sudo install epel-release
   [ansiblehost ~]$ sudo yum install -y ansible
@@ -99,7 +99,7 @@ Installing pre-requisites and ansible:
 
 Installing PIP (pip is the package installer for Python) for WinRM:
 
-```
+```bash
   [ansiblehost ~]$ sudo pip3 install --upgrade setuptools
   [ansiblehost ~]$ sudo python3 -m pip install --user --ignore-installed pywinrm
 ```
@@ -109,14 +109,14 @@ This should get your Ansible server to communicate with Windows clients.
 
 Clone this Github Repo to you Ansible folder to get all folder structure and sample files.
 
-```
+```bash
 [ansiblehost ~]$ cd /etc/ansible
 [ansiblehost ~]$ git clone https://github.com/nutanix-japan/ansible-ntnx.git .
 ```
 
 Make sure your ``/etc/ansible`` folder structure looks as follows:
 
-```
+```bash
 [ansiblehost ~]$tree /etc/ansible
  
 /etc/ansible
@@ -190,7 +190,7 @@ A sample hosts file would look like this. Note that we have put in entries for m
 File in github repo: ``ansible-ntnx/hosts.sample``
 File in Ansible folder ``/etc/ansible/hosts``
 
-```
+```bash
 # Example: A collection of database servers in the 'dbservers' group
 
 ## [dbservers]
@@ -213,9 +213,9 @@ server3
 
 Now lets do a Ansible ping command to check if the connections work from the Ansible server and avaiable to Ansible modules.
 
-```
 Use the windows server name to test the connections to windows target servers.
 
+```bash
 [ansiblehost ~]$ ansible server1 -m win_ping
 server1 | SUCCESS => {
     "changed": false,
@@ -294,6 +294,7 @@ In this section we will be only using win_package module.
         log_path: C:\virtio_x64-exe-{{lookup('pipe', 'date +%Y%m%dT%H%M%S')}}.log
 
 ```
+
 Note that the product ID/GUID ``product_id`` in the above playbook for the VirtIO package needs to be exact. This value is found by manually installing VirtIO package on a Windows server and finding the ``product_id`` either by using the Windows Registry or the following PowerShell command:
 
 ```PowerShell
@@ -321,7 +322,7 @@ ansible_winrm_server_cert_validation: ignore
 
 As we have everything required to run the playbook, let's run it.
 
-```
+```bash
 [ansiblehost ~]$ ansible-playbook /etc/ansible/playbooks/virtio.yml -e "NODES=windows-servers"
 
 PLAY [Install Nutanix VirtIO Package] *********************************************************************************************************************
@@ -363,8 +364,8 @@ We can now logon to the client to verify if VirtIO package was successful.
 
 ## Closing Tips
 
-- Automating configuration management using Ansible saves a lot of time
-- The RoI on configuration management is huge
 - Make sure to maintain your Ansible server with latest OS patches, and always secure files containing credentials and other sensitive information
 - Use Ansible tower for GUI experience and if you have on-going configuration management practice in your organisation
 - Be sure to ask questions in the Ansible forums. There is plenty of help available
+- Automating configuration management using Ansible saves a lot of time
+- The RoI on configuration management is huge
