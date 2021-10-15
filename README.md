@@ -39,7 +39,7 @@ I have referred to the following documents as far as I can remember.
 
 Ansible has an agent less connectivity Mechanism. It uses basic OS features (SSH and WinRM) to communicate with client machines.
 
-1. 1 x Linux Server (VM)
+1. 1 x Linux Server (VM) (TCP 5895 and TCP 5896)
 2. Network connectivity to client machines
    - WinRM connectivity for Windows servers 
    - SSH connectivity for Linux servers
