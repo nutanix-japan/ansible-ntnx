@@ -1,12 +1,12 @@
-# Ansible Automation for Installing Nutanix Tools
+# Nutanix Tools Install using Ansible Automation 
 
-This is a sample repo to get started with Ansible integration with Windows. Although this is not a new concept.
+This is a sample repo to get started with Ansible integration with Windows. Although this is not a new concept, we had a use for installing software on more than 5,000 windows servers. 
 
-This is a repo to just share the folder structure to install Nutanix VirtIO with interested parties. 
+This is a repo to share requisities, implementation flow and Ansible folder structure to install Nutanix VirtIO with interested parties. 
 
 There is a plan to increase the contents of this repo to include more Nutanix based use cases which can be achieved with Ansible.
 
-Ansible uses a server and no agents connection mechanism. All communication is done using SSH and WinRM for windows.
+Ansible uses a server and no-agents connection mechanism. All communication is done using SSH and WinRM for windows.
 
 ## Table of Contents
 
@@ -39,12 +39,11 @@ I have referred to the following documents as far as I can remember.
 
 Ansible has an agent less connectivity Mechanism. It uses basic OS features (SSH and WinRM) to communicate with client machines.
 
-1. 1 x Linux Server
+1. 1 x Linux Server (VM)
 2. Network connectivity to client machines
-    - WinRM connectivity for Windows servers
-    - SSH connectivity for Linux servers
+   - WinRM connectivity for Windows servers 
+   - SSH connectivity for Linux servers
 3. Internet or local repo connectivity on the Ansible server to download and install Ansible packages 
-
 ## Ansible Folder Structure
 
 Ansible has a very easy to manage folder structure. Ansible is usually installed in ``/etc/ansible`` folder on your server.
@@ -62,13 +61,13 @@ Ansible has a very easy to manage folder structure. Ansible is usually installed
 ## Security Considerations
 ### Ansible Secrets
 
-It is a secure to use Ansible Tower (licensed by RedHat) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing information in public forums like Github.
+Security should be top priority for design of any system. For Ansible implementations , it secure to use Ansible Tower (licensed by RedHat) to store your credentials for connecting to Ansible clients. Take care to not expose any credentials while storing information in public forums like Github.
 
 In this example we are just using a local file for defining credentials. Be sure to change this in your production environment. Make sure this is secure and not accidentally exposed in anyway. 
 
 Use the following (not limited) to make information secure:
 
-- Define exclusoins in .gitignore file to avoid uploading any sensitive file to GitHub repo
+- Define exclusions in .gitignore file to avoid uploading any sensitive file to GitHub repo
 - Use SSH key logon where possible
 - Avoid accidentally exposing credential while running script in STDOUT
 - Use password vaults
