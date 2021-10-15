@@ -1,3 +1,4 @@
+---
 
 - name: "Install Nutanix VirtIO Package"
   hosts: "{{ NODES }}"
